@@ -30,7 +30,7 @@ def resource(rel):
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi(resource_path("../finance_manageritog/ui/main_window.ui"), self)
+        uic.loadUi(resource_path("ui/main_window.ui"), self)
         self.db = Database()
 
         # Настройка таблиц
@@ -220,7 +220,7 @@ class MainWindow(QtWidgets.QMainWindow):
     # Добавление транзакции
     def on_add_transaction(self):
         dlg = QtWidgets.QDialog(self)
-        uic.loadUi(str(Path(__file__).parent / "ui" / "add_transaction.ui"), dlg)
+        uic.loadUi(resource_path("ui/add_transaction.ui"), dlg)
 
         dateEdit = dlg.findChild(QtWidgets.QDateEdit, "dateEdit")
         cmbAccount = dlg.findChild(QtWidgets.QComboBox, "cmbAccount")
