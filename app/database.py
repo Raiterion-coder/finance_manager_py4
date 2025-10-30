@@ -89,6 +89,7 @@ class Database:
         self.conn.commit()
     # Удаляет транзакцию по дате, имени счёта, категории и сумме
     # После удаления корректирует баланс счёта
+
     def delete_transaction(self, date, account_name, category, amount):
         cur = self.conn.cursor()
         cur.execute("SELECT id FROM accounts WHERE name=?", (account_name,))
