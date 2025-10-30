@@ -5,6 +5,8 @@ from pathlib import Path
 from PyQt5 import QtWidgets, QtCore, uic
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtCore import QUrl
+from matplotlib.dates import AutoDateLocator, DateFormatter
+
 from app.database import Database
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
@@ -166,7 +168,17 @@ class MainWindow(QtWidgets.QMainWindow):
         ax.set_xlabel("Дата")
         ax.set_ylabel("Баланс, ₽")
 
-        ax.text(dates[-1], balance[-1], f"{balance[-1]:,.2f} ₽", fontsize=10, color='blue', ha='left', va='bottom')
+        locator = AutoDateLocator(minticks=5, maxticks=10)  # максимум 10 подписей
+        formatter = DateFormatter("%d.%m.%Y")
+        ax.xaxis.set_major_locator(locator)
+        ax.xaxis.set_major_formatter(formatter)
+        fig.autofmt_xdate(rotation=45)
+
+        ax.text(
+            dates[-1], balance[-1],
+            f"{balance[-1]:,.2f} ₽",
+            fontsize=10, color='blue', ha='left', va='bottom'
+        )
 
         canvas.draw()
         dialog.exec_()
