@@ -58,7 +58,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # Обновление таблицы счетов и транзакций
     def refresh_tables(self):
-        # --- Счета ---
+        # Счета
         accs = self.db.list_accounts()
         self.tblAccounts.setRowCount(0)
         for i, a in enumerate(accs):
@@ -66,7 +66,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.tblAccounts.setItem(i, 0, QtWidgets.QTableWidgetItem(a['name']))
             self.tblAccounts.setItem(i, 1, QtWidgets.QTableWidgetItem(str(a['balance'])))
 
-        # --- Транзакции ---
+        # Транзакции
         txs = self.db.list_transactions()
         self.tblTransactions.setRowCount(0)
         for i, t in enumerate(txs):
