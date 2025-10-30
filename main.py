@@ -56,10 +56,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.btnDelAccount.clicked.connect(self.delete_account)
         self.btnDelTx.clicked.connect(self.delete_transaction)
 
-    # Обновление таблицы счетов
-    # ---------------------------
     # Обновление таблицы счетов и транзакций
-    # ---------------------------
     def refresh_tables(self):
         # --- Счета ---
         accs = self.db.list_accounts()
@@ -99,6 +96,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.db.add_account(name.strip(), balance)
         self.refresh_tables()
 
+    # Постройка графика для счета
     def show_chart(self):
         accounts = self.db.list_accounts()
         if not accounts:
