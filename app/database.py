@@ -12,6 +12,7 @@ else:
 
 DB_PATH = BASE_DIR / "finance.db"
 
+
 # Класс для работы с локальной базой данных финансов
 class Database:
     def __init__(self):
@@ -87,6 +88,7 @@ class Database:
     def vacuum(self):
         self.conn.execute("VACUUM")
         self.conn.commit()
+
     # Удаляет транзакцию по дате, имени счёта, категории и сумме
     # После удаления корректирует баланс счёта
 
