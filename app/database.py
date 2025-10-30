@@ -83,6 +83,10 @@ class Database:
         """
         return self.conn.execute(q).fetchall()
 
+    # Освобождает неиспользуемое пространство и уменьшает размер файла базы данных.
+    def vacuum(self):
+        self.conn.execute("VACUUM")
+        self.conn.commit()
     # Удаляет транзакцию по дате, имени счёта, категории и сумме
     # После удаления корректирует баланс счёта
     def delete_transaction(self, date, account_name, category, amount):
@@ -99,6 +103,9 @@ class Database:
         """, (date, account_id, category, amount))
         self.conn.commit()
         self.update_account_balance(account_id, -amount)
+
+        # После удаления очищаем базу
+        self.vacuum()
 
     # Извлекает фото из транзакции (если оно есть)
     def get_transaction_photo(self, date, account_name, category, amount):

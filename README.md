@@ -60,9 +60,7 @@ finance_manager/
 ├── requirements.txt           # Список зависимостей
 ├── app/
 │   ├── database.py            # Класс Database для работы с SQLite
-│   └── data/ 
-│       ├── photos		#Папка с фотографиями для транзакций
-│       └── finance.db		#База данных
+│   └── finance.db             #База данных
 │   
 │
 ├── ui/
