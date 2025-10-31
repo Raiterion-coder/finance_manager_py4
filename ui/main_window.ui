@@ -80,6 +80,31 @@
                         </property>
                     </widget>
                 </item>
+
+                <!-- 🔍 Поиск по транзакциям -->
+                <item>
+                    <layout class="QHBoxLayout" name="layoutSearch">
+                        <item>
+                            <widget class="QLineEdit" name="searchEdit">
+                                <property name="placeholderText">
+                                    <string>🔍 Поиск по транзакциям...</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QPushButton" name="btnClearFilter">
+                                <property name="text">
+                                    <string>Сбросить фильтр</string>
+                                </property>
+                            </widget>
+                        </item>
+                    </layout>
+                </item>
+
+                <item>
+                    <widget class="QTableWidget" name="tblTransactions"/>
+                </item>
+
                 <item>
                     <widget class="QTableWidget" name="tblTransactions"/>
                 </item>

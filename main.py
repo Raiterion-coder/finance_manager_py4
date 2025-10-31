@@ -58,6 +58,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.btnDelAccount.clicked.connect(self.delete_account)
         self.btnDelTx.clicked.connect(self.delete_transaction)
 
+        # Подключение поиска и фильтрации
+        self.searchEdit.textChanged.connect(lambda text: self.filter_transactions(text))
+        self.btnClearFilter.clicked.connect(lambda: self.searchEdit.setText(""))
+
     # Обновление таблицы счетов и транзакций
     def refresh_tables(self):
         # Счета
@@ -97,6 +101,18 @@ class MainWindow(QtWidgets.QMainWindow):
         # Добавление счёта в базу данных и обновление таблицы
         self.db.add_account(name.strip(), balance)
         self.refresh_tables()
+
+    # Фильтрует строки таблицы транзакций по введённому слову
+    def filter_transactions(self, keyword):
+        keyword = keyword.lower().strip()
+        for row in range(self.tblTransactions.rowCount()):
+            match = False
+            for col in range(self.tblTransactions.columnCount()):
+                item = self.tblTransactions.item(row, col)
+                if item and keyword in item.text().lower():
+                    match = True
+                    break
+            self.tblTransactions.setRowHidden(row, not match)
 
     # Постройка графика для счета
     def show_chart(self):
